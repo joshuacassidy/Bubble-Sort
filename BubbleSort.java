@@ -20,26 +20,16 @@ public class BubbleSort <T extends Comparable<T>> {
     }
 
     public T[] recursiveSort(T[] listOfItems,int i){
-        if(i < listOfItems.length-1){
-            listOfItems = recursiveSortComparison(listOfItems,i,0);
-            i++;
-            return recursiveSort(listOfItems,i);
-        }
-        return listOfItems;
+        return i < listOfItems.length-1 ? recursiveSort(recursiveSortComparison(listOfItems,i,0),i+1) : listOfItems;
     }
 
     public T[] recursiveSortComparison(T[] listOfItems,int i,int j){
-        if(j < listOfItems.length-i-1){
-            if(listOfItems[j].compareTo(listOfItems[j+1]) > 0){
-                T temp = listOfItems[j+1];
-                listOfItems[j+1] = listOfItems[j];
-                listOfItems[j] = temp;
-            }
-            j++;
-            return recursiveSortComparison(listOfItems,i,j);
+        if(j < listOfItems.length-i-1 && listOfItems[j].compareTo(listOfItems[j+1]) > 0){
+            T temp = listOfItems[j+1];
+            listOfItems[j+1] = listOfItems[j];
+            listOfItems[j] = temp;
         }
-        return listOfItems;
-
+        return j < listOfItems.length-i-1 ? recursiveSortComparison(listOfItems,i,j+1) : listOfItems;
     }
 
 }
